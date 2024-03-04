@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cart</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    .total-price {
+      font-size: 1.25em;
+      color: #333;
+    }
+    body {
+      background-color: white;
+      width: 100vw;
+      height: 100vh;
+    }
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url("/images/chestBack.png");
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: cover;
+      opacity: 0.4; 
+      z-index: -1; 
+    }
+    .cart-item {
+      display: flex;
+      align-items: center;
+    }
+    .cart-item-image {
+      border: 7px white solid;
+      border-style: outset;
+      padding: 5px;
+    }
+    .cart-item-info {
+      display: flex;
+      flex-direction: column;
+      padding-left: 20px;
+    }
+    .btn-remove-item {
+      margin-left: auto;
+    }
+    .cartPics {
+      width: 80px; /* Adjust based on your needs */
+      height: auto;
+    }
+  </style>
+</head>
+<%- include('partials/navbar') %>
+<br><br><br><br>
+<div id="flash-messages-purchase"></div>
+<body> 
+  <div class="container">
+    <h2><%= user.customername %> Shopping Cart</h2>
+    <% if (user.cart && user.cart.items && user.cart.items.length > 0) { %>
+      <div class="table-responsive">
+        <table class="table">
+          <tbody>
+          <% user.cart.items.forEach((item, index) => { %>
+            <tr>
+              <td class="cart-item">
+                <div class="cart-item-image">
+                  <img src="/images/<%= item.productId.imageName %>" class="cartPics" alt="<%= item.productId.name %>">
+                </div>
+                <div class="cart-item-info">
+                  <div class="cartName"><%= item.productId.name %></div>
+                  <div>Price: $<%= item.price.toFixed(2) %></div>
+                  <div>Quantity: <%= item.quantity %></div>
+                  <div>Total: $<%= (item.price * item.quantity).toFixed(2) %></div>
+                </div>
+                <form action="/removeFromCart/<%= item.productId._id %>" method="POST" class="btn-remove-item">
+                  <button type="submit" class="btn btn-light btn-sm">
+                    remove item
+                  </button>
+                </form>
+              </td>
+            </tr>
+          <% }); %>
+            <tr>
+              <td class="text-right total-price totalPrice">Total: $<%= user.cart.totalPrice.toFixed(2) %></td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <div class="d-flex justify-content-center">
+          <form action="/clearCart" method="GET" class="mr-2">
+            <button type="submit" class="btn btn-light">Empty Cart</button>
+          </form>
+          <form action="/purchase" method="POST">
+            <button type="submit" class="btn btn-primary">Purchase</button>
+          </form>
+        </div>
+      </div>
+    <% } else { %>
+      <p>Your cart is empty.</p>
+    <% } %>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const purchaseForm = document.querySelector('form[action="/purchase"]');
+      if (purchaseForm) {
+        purchaseForm.addEventListener('submit', function (e) {
+
+          const flashMessage = document.getElementById('flash-messages-purchase');
+          flashMessage.innerHTML = '<div class="alert alert-success" role="alert">Purchase Successful.</div>';
+          document.body.appendChild(flashMessage);
+          
+          // Remove flash message after 3 seconds
+          setTimeout(function () {
+            flashMessage.remove();
+          }, 6000);
+        });
+      }
+    });
+  </script>
+</body>
+</html>

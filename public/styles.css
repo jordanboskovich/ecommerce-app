@@ -1,0 +1,44 @@
+@font-face {
+  font-family: 'minecraftBold';
+  src: url('/fonts/MinecraftTen.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'minecraftReg';
+  src: url('/fonts/mcReg.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+p, #searchInput, a, .disabled, button, #username, #password, input, td {
+  font-family: 'minecraftReg';
+}
+
+h1, h2, h3, h4, h5, h6, label, .input-group-text, th, .cartName, .totalPrice {
+  font-family: 'minecraftBold';
+}
+
+#flash-messages, #flash-messages-purchase {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 1050; /* Ensure it's above most other content */
+  text-align: center;
+}
+.alert {
+  display: inline-block;
+  margin: 0.5rem;
+}
+#addToCart{
+      margin: auto;
+    }
+
+
+#profilePic{
+  height: 40vh;
+  width: auto;
+  border: 7px white;
+  border-style: outset;
+}

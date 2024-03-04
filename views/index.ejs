@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Minecraft Store</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  
+  <style>
+    body{
+      background-image: url("/images/background.webp");
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: cover;
+    }
+    .product-card {
+      width: 18rem;
+      margin-bottom: 20px;
+      text-align: center;
+      border: 7px white;
+      border-style: outset;
+      background-color: rgba(165, 168, 173, 0.5); 
+    }
+    .card-img-top {
+      max-width: 80%; 
+      height: auto; 
+      margin: 5%; 
+      padding-left: 8%;
+    }
+    .pagination-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    padding: 10px 0;
+    background-color: #f8f9fa; /* Light gray background */
+    border-top: 1px solid #dee2e6; /* Add a top border for separation */
+  }
+  .page-item {
+    margin: 0 10px; /* Increase spacing between items */
+    padding: 5px 10px; /* Add padding for a button-like appearance */
+    color: #007bff; /* Bootstrap primary blue */
+    text-decoration: none; /* Remove underline from links */
+    border-radius: 5px; /* Rounded corners for the buttons */
+    transition: background-color 0.2s; /* Smooth background color transition for hover effect */
+  }
+  .page-item:hover {
+    background-color: #e9ecef; /* Slightly darker background on hover */
+  }
+  .active {
+    font-weight: bold;
+    color: #fff !important; /* White text for active page */
+    background-color: #007bff !important; /* Bootstrap primary blue background */
+    pointer-events: none; /* Disable pointer events to avoid click effect */
+  }
+  .disabled {
+    color: #6c757d; /* Bootstrap secondary text color */
+    pointer-events: none; /* Make sure disabled items are not clickable */
+    background-color: #f8f9fa; /* Maintain the background color for disabled items */
+  }
+  </style>
+</head>
+<body>
+  <%- include('partials/navbar') %>
+  <br><br><br><br>
+   <div id="flash-messages"></div>
+   <div class="container">
+    <div class="row justify-content-between align-items-center">
+        <div class="col">
+            <h2>Products</h2>
+        </div>
+        <div class="col text-right">
+            <a href="/product/food" class="btn btn-link">Food</a>
+            <a href="/product/blocks" class="btn btn-link">Blocks</a>
+            <a href="/product/tools" class="btn btn-link">Tools</a>
+        </div>
+    </div>
+    <input type="text" id="searchInput" name="searchInput" placeholder="Search by name..." class="form-control mb-3">
+    <div id="productsList" class="container">
+    <div class="row">
+  <% products.forEach(product => { %>
+    <div class="col-md-4">
+      <div class="card product-card">
+        <img src="/images/<%= product.imageName %>" class="card-img-top" alt="<%= product.name %>">
+        <div class="card-body">
+          <h4 class="card-title"><%= product.name %></h4>
+          <p class="card-text"><i><%= product.description %></i></p>
+          <p class="card-text">
+            $<%= product.price %> &nbsp | &nbsp <%= product.stock %> available
+          </p>
+          <form class="mt-3" action="/addToCart" method="POST">
+          <div class="form-row align-items-center">
+            <div class="col-auto">
+              <label class="sr-only" for="quantity-<%= product.name.replace(/\s+/g, '-') %>">Quantity:</label>
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Quantity:</div>
+                </div>
+                <input type="number" class="form-control" id="quantity-<%= product.name.replace(/\s+/g, '-') %>" name="quantity" value="1">
+              </div>
+            </div>
+            <input type="hidden" name="productId" value="<%= product._id %>" data-stock="<%= product.stock %>">
+              <button type="submit" class="btn btn-primary mb-2" id="addToCart">Add to Cart</button>
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
+  <% }) %>
+</div>
+  </div>
+  <div class="pagination-footer">
+  <% if (page > 1) { %>
+    <a href="/?page=<%= page - 1 %>" class="page-item">Previous</a>
+  <% } else { %>
+    <span class="page-item disabled">Previous</span>
+  <% } %>
+  
+  <% for(let i = 1; i <= lastPage; i++) { %>
+    <% if (i === page) { %>
+      <span class="page-item active"><%= i %></span>
+    <% } else { %>
+      <a href="/?page=<%= i %>" class="page-item"><%= i %></a>
+    <% } %>
+  <% } %>
+  
+  <% if (page < lastPage) { %>
+    <a href="/?page=<%= page + 1 %>" class="page-item">Next</a>
+  <% } else { %>
+    <span class="page-item disabled">Next</span>
+  <% } %>
+</div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="/script.js"></script>
+</body>
+</html>

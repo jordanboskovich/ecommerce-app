@@ -1,0 +1,232 @@
+[
+  { 
+     "name": "Diamond Pickaxe", 
+     "description": "Durable mining tool", 
+     "price": 15, "stock": 5, 
+     "imageName": "diamond_pickaxe.png", 
+     "type": "tools" 
+  },
+  { 
+    "name": "Iron Shovel", 
+    "description": "Basic digging tool", 
+    "price": 7, "stock": 12, 
+    "imageName": "iron_shovel.png", 
+    "type": "tools" 
+  },
+  {
+    "name": "Golden Axe",
+    "description": "Fast but low durability",
+    "price": 10,
+    "stock": 8,
+    "imageName": "golden_axe.png",
+    "type": "tools"
+  },
+  {
+    "name": "Stone Hoe",
+    "description": "Simple farming tool",
+    "price": 4,
+    "stock": 15,
+    "imageName": "stone_hoe.png",
+    "type": "tools"
+  },
+  {
+    "name": "Wooden Sword",
+    "description": "Basic melee weapon",
+    "price": 3,
+    "stock": 20,
+    "imageName": "wooden_sword.png",
+    "type": "tools"
+  },
+  {
+    "name": "Iron Axe",
+    "description": "Versatile woodcutter",
+    "price": 9,
+    "stock": 9,
+    "imageName": "iron_axe.png",
+    "type": "tools"
+  },
+  {
+    "name": "Diamond Sword",
+    "description": "High-damage melee weapon",
+    "price": 18,
+    "stock": 4,
+    "imageName": "diamond_sword.png",
+    "type": "tools"
+  },
+  {
+    "name": "Netherite Pickaxe",
+    "description": "Top-tier mining tool",
+    "price": 25,
+    "stock": 3,
+    "imageName": "netherite_pickaxe.png",
+    "type": "tools"
+  },
+  {
+    "name": "Wooden Pickaxe",
+    "description": "Basic mining tool",
+    "price": 2,
+    "stock": 25,
+    "imageName": "wooden_pickaxe.png",
+    "type": "tools"
+  },
+  {
+    "name": "Iron Sword",
+    "description": "Durable melee weapon",
+    "price": 12,
+    "stock": 7,
+    "imageName": "iron_sword.png",
+    "type": "tools"
+  },
+  {
+    "name": "Bread",
+    "description": "Simple nourishment",
+    "price": 2,
+    "stock": 20,
+    "imageName": "bread.png",
+    "type": "food"
+  },
+  {
+    "name": "Cooked Porkchop",
+    "description": "Delicious and filling",
+    "price": 10,
+    "stock": 8,
+    "imageName": "cooked_porkchop.png",
+    "type": "food"
+  },
+  {
+    "name": "Golden Apple",
+    "description": "Grants regeneration and absorption",
+    "price": 15,
+    "stock": 5,
+    "imageName": "golden_apple.png",
+    "type": "food"
+  },
+  {
+    "name": "Carrot",
+    "description": "Basic vegetable",
+    "price": 1,
+    "stock": 30,
+    "imageName": "carrot.png",
+    "type": "food"
+  },
+  {
+    "name": "Melon Slice",
+    "description": "Refreshing snack",
+    "price": 3,
+    "stock": 25,
+    "imageName": "melon_slice.png",
+    "type": "food"
+  },
+  {
+    "name": "Cooked Chicken",
+    "description": "Tasty and nutritious",
+    "price": 8,
+    "stock": 12,
+    "imageName": "cooked_chicken.png",
+    "type": "food"
+  },
+  {
+    "name": "Rabbit Stew",
+    "description": "Complex and hearty dish",
+    "price": 12,
+    "stock": 6,
+    "imageName": "rabbit_stew.png",
+    "type": "food"
+  },
+  {
+    "name": "Beetroot Soup",
+    "description": "Healthy vegetable soup",
+    "price": 5,
+    "stock": 15,
+    "imageName": "beetroot_soup.png",
+    "type": "food"
+  },
+  {
+    "name": "Pumpkin Pie",
+    "description": "Sweet and festive treat",
+    "price": 6,
+    "stock": 14,
+    "imageName": "pumpkin_pie.png",
+    "type": "food"
+  },
+  {
+    "name": "Stone Block",
+    "description": "Basic building block",
+    "price": 1,
+    "stock": 50,
+    "imageName": "stone_block.png",
+    "type": "blocks"
+  },
+  {
+    "name": "Wooden Plank",
+    "description": "Versatile building material",
+    "price": 3,
+    "stock": 30,
+    "imageName": "wooden_plank.png",
+    "type": "blocks"
+  },
+  {
+    "name": "Brick Block",
+    "description": "Sturdy construction material",
+    "price": 4,
+    "stock": 25,
+    "imageName": "brick_block.png",
+    "type": "blocks"
+  },
+  {
+    "name": "Obsidian Block",
+    "description": "Resistant to explosions",
+    "price": 10,
+    "stock": 10,
+    "imageName": "obsidian_block.png",
+    "type": "blocks"
+  },
+  {
+    "name": "Sand Block",
+    "description": "Common desert material",
+    "price": 2,
+    "stock": 40,
+    "imageName": "sand_block.png",
+    "type": "blocks"
+  },
+  {
+    "name": "Grass Block",
+    "description": "Fundamental for landscaping",
+    "price": 3,
+    "stock": 35,
+    "imageName": "grass_block.png",
+    "type": "blocks"
+  },
+  {
+    "name": "Nether Quartz Ore",
+    "description": "Found in the Nether",
+    "price": 8,
+    "stock": 12,
+    "imageName": "nether_quartz_ore.png",
+    "type": "blocks"
+  },
+  {
+    "name": "Redstone Block",
+    "description": "Used in various contraptions",
+    "price": 7,
+    "stock": 15,
+    "imageName": "redstone_block.png",
+    "type": "blocks"
+  },
+  {
+    "name": "Ice Block",
+    "description": "Melts into water when broken",
+    "price": 5,
+    "stock": 20,
+    "imageName": "ice_block.png",
+    "type": "blocks"
+  },
+  {
+    "name": "Diamond Block",
+    "description": "Valuable and decorative",
+    "price": 30,
+    "stock": 5,
+    "imageName": "diamond_block.png",
+    "type": "blocks"
+  }
+]

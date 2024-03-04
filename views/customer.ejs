@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Profile</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  
+  <style>
+
+    body{
+      background-color: white;
+      height: 100vh;
+    }
+    
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url("/images/stoneBack.jpg");
+       background-repeat: no-repeat;
+      background-position: center center;
+      background-size: cover;
+      opacity: 0.3; 
+      z-index: -1; 
+    }
+    
+    
+    .table thead tr th,
+    .table tbody tr td {
+      border-top: none;
+    }
+
+    .table tbody tr:first-child td {
+      border-top: none; 
+    }
+
+  </style>
+  
+</head>
+<body>
+ <%- include('partials/navbar') %>
+ <br><br><br><br><br>
+ 
+  <div class="container">
+    <div class="row">
+      <!-- Customer Profile Column -->
+      <div class="col-md-6">
+        <h2>Customer Profile</h2>
+        <p><strong>Username:</strong> <%= user.username %></p>
+
+        <!-- Display user profile picture if exists -->
+        <% if (user.profilePictureUrl) { %>
+          <img src="<%= user.profilePictureUrl %>" alt="User Image" class="img-fluid mt-2" id="profilePic">
+        <% } else { %>
+          <p>No profile picture uploaded.</p>
+        <% } %>
+        
+        <br><br>
+       
+       
+        <!-- Image upload form -->
+        <form action="/upload-profile-picture" method="POST" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="profilePicture">Change Profile Picture</label>
+            <input type="file" class="form-control-file" id="profilePicture" name="profilePicture" required>
+          </div>
+          <button type="submit" class="btn btn-primary">Upload</button>
+        </form>
+
+    
+      </div>
+
+
+      <!-- Purchase History Column -->
+      <div class="col-md-6">
+        <h2><%= user.username %>'s Purchase History</h2>
+        <% if (user.purchases && user.purchases.items && user.purchases.items.length > 0) { %>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Price</th>
+                  <th>Quantity</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody>
+              <% user.purchases.items.forEach(item => { %>
+                <tr>
+                  <td><%= item.productId.name %></td>
+                  <td>$<%= item.price.toFixed(2) %></td>
+                  <td><%= item.quantity %></td>
+                  <td>$<%= (item.price * item.quantity).toFixed(2) %></td>
+                </tr>
+              <% }); %>
+                <tr><td colspan="4"><hr></td></tr>
+                <tr>
+                  <td><strong>Total Spent</strong></td>
+                  <td><%= user.purchases.totalPrice.toFixed(2) %></td>
+                </tr>
+                <tr>
+                  <td><strong>Total Purchases</strong></td>
+                  <td><%= user.purchases.totalQuantity %></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        <% } else { %>
+          <p>You have no purchase history.</p>
+        <% } %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

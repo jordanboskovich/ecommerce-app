@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    
+    <style>
+      
+      body {
+        background-color: white;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    
+      body::before {
+        content: '';
+        position: fixed; 
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: url("/images/loginPage.jpg");
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        opacity: 1;
+        z-index: -1;
+      }
+      
+      .login-box {
+        border: 7px white solid;
+        border-style: outset;
+        background-color: rgba(165, 168, 173, 0.5);
+        padding: 20px;
+        border-radius: 10px; 
+        width: fit-content;
+        box-shadow: 0 0 10px rgba(0,0,0,0.3); 
+      }
+      
+      .form-control {
+        margin-bottom: 15px; 
+        border-radius: 5px; 
+      }
+      
+      .btn-primary {
+        width: 100%; 
+        margin-top: 10px; 
+      }
+      
+      a{
+        color: white;
+      }
+      
+    </style>
+    
+</head>
+<body>
+  <div class="login-box">
+    <h1>Log In</h1>
+    <form action="/login" method="POST">
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required class="form-control" placeholder="Username">
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required class="form-control" placeholder="Password">
+      </div>
+      <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+    <p>Don't have an account? <a href="/register">Register here</a></p>
+  </div>
+</body>
+</html>
