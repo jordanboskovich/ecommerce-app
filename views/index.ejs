@@ -86,7 +86,7 @@
             <img src="/images/<%= product.imageName %>" class="card-img-top" alt="<%= product.name %>">
             <div class="card-body">
               <h4 class="card-title"><%= product.name %></h4>
-              <p class="card-text"><i><%= product.description %></i></p>
+              <p class="card-text" style='display:none' ><i><%= product.description %></i></p>
               <p class="card-text">
                 $<%= product.price %> &nbsp;|&nbsp; <%= product.stock %> available
               </p>
@@ -111,6 +111,7 @@
       <% }) %>
     </div>
   </div>
+  <img src="/images/villager.png" alt="villager" id="villager">
   <div class="pagination-footer">
     <% if (page > 1) { %>
       <a href="/?page=<%= page - 1 %>" class="page-item">Previous</a>

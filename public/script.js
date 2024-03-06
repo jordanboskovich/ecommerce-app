@@ -1,3 +1,35 @@
+// Function to show the speech bubble with item information
+function showSpeechBubble(info) {
+  const speechBubble = document.querySelector('.speech-bubble') || createSpeechBubble();
+  speechBubble.innerHTML = info;
+  speechBubble.style.display = 'block';
+}
+
+// Function to create and return a speech bubble element
+function createSpeechBubble() {
+  const speechBubble = document.createElement('div');
+  speechBubble.classList.add('speech-bubble');
+  document.body.appendChild(speechBubble);
+  return speechBubble;
+}
+
+// Event handler for product card clicks
+function productClickHandler() {
+  const name = this.querySelector('.card-title').innerText;
+  const description = this.querySelector('.card-text').innerText;
+  const info = `<strong>${name}</strong><br>${description}`;
+  showSpeechBubble(info);
+}
+
+// Function to attach click event listeners to product cards
+function attachProductClickListeners() {
+  const products = document.querySelectorAll('.product-card');
+  products.forEach(product => {
+    product.removeEventListener('click', productClickHandler); // Remove existing listener to avoid duplicates
+    product.addEventListener('click', productClickHandler); // Attach new listener
+  });
+}
+
 // Add event listener to search input field to update products on input change
 document.getElementById('searchInput').addEventListener('input', updateProducts);
 
@@ -18,15 +50,11 @@ async function updateProducts() {
       body: JSON.stringify({ name }),
     });
 
-    // Check if response is ok
     if (response.ok) {
-      // Parse response to JSON
       const products = await response.json();
-      // Get the container element to display products
       const container = document.getElementById('productsList');
       container.innerHTML = '';
       
-      // Create a row for products display
       let row = container.querySelector('.row');
       if (!row) {
         row = document.createElement('div');
@@ -35,7 +63,6 @@ async function updateProducts() {
         row.innerHTML = '';
       }
 
-      // Iterate through products and create product elements
       products.forEach(product => {
         const productElement = `
           <div class="col-md-4">
@@ -64,23 +91,17 @@ async function updateProducts() {
             </div>
           </div>
         `;
-
-        // Append product element to the row
         row.innerHTML += productElement;
       });
       
-      // Append row to the container
       container.appendChild(row);
-      // Attach form submit listeners to the newly added forms
       attachFormSubmitListeners();
+      attachProductClickListeners();
 
-      // Toggle pagination footer visibility based on search input
       paginationFooter.style.display = name.trim() ? 'none' : 'flex';
       if (!name.trim()) {
-        // Reload page if search input is empty
         location.reload();
       }
-
     } else {
       console.error('Response not ok with status:', response.status);
     }
@@ -93,15 +114,12 @@ async function updateProducts() {
 function attachFormSubmitListeners() {
   document.querySelectorAll('form').forEach(form => {
     form.onsubmit = function(e) {
-      // Get product stock and quantity input value
       const stock = parseInt(this.querySelector('input[type=hidden][name="productId"]').dataset.stock, 10);
       const quantityInput = this.querySelector('input[type=number][name="quantity"]');
       const quantity = parseInt(quantityInput.value, 10);
 
-      // Get flash messages container
       const flashMessages = document.getElementById('flash-messages');
 
-      // Validate quantity input
       if (quantity < 1) {
         e.preventDefault(); 
         flashMessages.innerHTML = '<div class="alert alert-danger" role="alert">Quantity cannot be less than 1.</div>';
@@ -109,7 +127,6 @@ function attachFormSubmitListeners() {
         return false;
       }
 
-      // Check if quantity exceeds stock
       if (quantity > stock) {
         e.preventDefault(); 
         flashMessages.innerHTML = '<div class="alert alert-danger" role="alert">Exceeds maximum stock.</div>';
@@ -122,7 +139,8 @@ function attachFormSubmitListeners() {
   });
 }
 
-// Attach form submit listeners when DOM content is loaded
+// Initialize listeners when DOM content is loaded
 document.addEventListener("DOMContentLoaded", function() {
   attachFormSubmitListeners();
+  attachProductClickListeners();
 });

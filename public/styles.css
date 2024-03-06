@@ -42,3 +42,64 @@ h1, h2, h3, h4, h5, h6, label, .input-group-text, th, .cartName, .totalPrice {
   border: 7px white;
   border-style: outset;
 }
+
+/* Position the villager at the bottom right corner */
+#villager {
+  position: fixed;
+  bottom: -15%;
+  right: -18%;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  z-index: -1;
+}
+
+/* Enlarge the villager icon slightly on hover */
+#villager:hover {
+  transform: scale(1.1);
+}
+
+/* Style for the speech bubble */
+.speech-bubble {
+  position: fixed;
+  display: none; /* Hide by default */
+  bottom: 30%; /* Positioning */
+  right: 0%; /* Positioning */
+  padding: 10px;
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  width: 200px;
+  z-index: 100; /* Ensure it's above other elements */
+  margin-bottom: 7%;
+}
+
+/* Arrow-like effect for the speech bubble */
+.speech-bubble:after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -10px;
+  border-width: 10px;
+  border-style: solid;
+  border-color: white transparent transparent transparent;
+}
+
+/* Style for the speech bubble */
+.speech-bubble {
+  position: fixed;
+  display: none; /* Hide by default */
+  bottom: 120px; /* Positioning */
+  right: 20px; /* Positioning */
+  padding: 10px;
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  width: 200px;
+  z-index: 100; /* Ensure it's above other elements */
+  font-family: 'minecraftReg', sans-serif; /* Ensure font consistency */
+}
+
+.speech-bubble strong {
+  font-family: 'minecraftBold', sans-serif;
+}
