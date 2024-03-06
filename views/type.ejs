@@ -7,7 +7,7 @@
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   
   <style>
-  
+    /* Custom CSS styles */
     body{
       background-image: url("/images/background.webp");
       background-repeat: no-repeat;
@@ -29,85 +29,92 @@
       padding-left: 8%;
     }
     
+    /* Custom font imports and usage */
     @font-face {
         font-family: 'minecraftBold';
         src: url('/fonts/MinecraftTen.woff') format('woff');
         font-weight: normal;
         font-style: normal;
-      }
-      @font-face {
+    }
+    @font-face {
         font-family: 'minecraftReg';
         src: url('/fonts/mcReg.woff') format('woff');
         font-weight: normal;
         font-style: normal;
-      }
+    }
 
-      p, #searchInput, a, .disabled, button, #username, #password, input, td {
-        font-family: 'minecraftReg';
-      }
+    p, #searchInput, a, .disabled, button, #username, #password, input, td {
+      font-family: 'minecraftReg';
+    }
 
-      h1, h2, h3, h4, h5, h6, label, .input-group-text, th, .cartName, .totalPrice, .titleLink {
-        font-family: 'minecraftBold';
-      }
+    h1, h2, h3, h4, h5, h6, label, .input-group-text, th, .cartName, .totalPrice, .titleLink {
+      font-family: 'minecraftBold';
+    }
 
-      #flash-messages, #flash-messages-purchase {
-        position: fixed;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        z-index: 1050; /* Ensure it's above most other content */
-        text-align: center;
-      }
-      .alert {
-        display: inline-block;
-        margin: 0.5rem;
-      }
-  
+    /* Flash messages styling */
+    #flash-messages, #flash-messages-purchase {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      z-index: 1050; /* Ensure it's above most other content */
+      text-align: center;
+    }
+    .alert {
+      display: inline-block;
+      margin: 0.5rem;
+    }
   </style>
-  
 </head>
 <body>
   
+  <!-- Include navbar partial -->
   <%- include('partials/navbar') %>
   <br><br><br><br>
-   <div id="flash-messages"></div>
-   <div class="container">
+  
+  <!-- Flash messages container -->
+  <div id="flash-messages"></div>
+  
+  <!-- Main content container -->
+  <div class="container">
+    <!-- Title and breadcrumb -->
     <h2><a class="titleLink" href="/">Products</a> > <%= type%></h2>
+    <!-- Product list -->
     <div id="productsList" class="container">
-    <div class="row">
-  <% products.forEach(product => { %>
-    <div class="col-md-4">
-      <div class="card product-card">
-        <img src="/images/<%= product.imageName %>" class="card-img-top" alt="<%= product.name %>">
-        <div class="card-body">
-          <h4 class="card-title"><%= product.name %></h4>
-          <p class="card-text"><i><%= product.description %></i></p>
-          <p class="card-text">
-            $<%= product.price %> &nbsp | &nbsp <%= product.stock %> available
-          </p>
-          <form class="mt-3" action="/addToCart" method="POST">
-          <div class="form-row align-items-center">
-            <div class="col-auto">
-              <label class="sr-only" for="quantity-<%= product.name.replace(/\s+/g, '-') %>">Quantity:</label>
-              <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                  <div class="input-group-text">Quantity:</div>
-                </div>
-                <input type="number" class="form-control" id="quantity-<%= product.name.replace(/\s+/g, '-') %>" name="quantity" value="1">
+      <div class="row">
+        <% products.forEach(product => { %>
+          <div class="col-md-4">
+            <div class="card product-card">
+              <img src="/images/<%= product.imageName %>" class="card-img-top" alt="<%= product.name %>">
+              <div class="card-body">
+                <h4 class="card-title"><%= product.name %></h4>
+                <p class="card-text"><i><%= product.description %></i></p>
+                <p class="card-text">
+                  $<%= product.price %> &nbsp | &nbsp <%= product.stock %> available
+                </p>
+                <form class="mt-3" action="/addToCart" method="POST">
+                  <div class="form-row align-items-center">
+                    <div class="col-auto">
+                      <label class="sr-only" for="quantity-<%= product.name.replace(/\s+/g, '-') %>">Quantity:</label>
+                      <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text">Quantity:</div>
+                        </div>
+                        <input type="number" class="form-control" id="quantity-<%= product.name.replace(/\s+/g, '-') %>" name="quantity" value="1">
+                      </div>
+                    </div>
+                    <input type="hidden" name="productId" value="<%= product._id %>" data-stock="<%= product.stock %>">
+                    <button type="submit" class="btn btn-primary mb-2" id="addToCart">Add to Cart</button>
+                  </div>
+                </form>
               </div>
             </div>
-            <input type="hidden" name="productId" value="<%= product._id %>" data-stock="<%= product.stock %>">
-              <button type="submit" class="btn btn-primary mb-2" id="addToCart">Add to Cart</button>
           </div>
-        </form>
-
-        </div>
+        <% }) %>
       </div>
     </div>
-  <% }) %>
-</div>
   </div>
-  </div>
+  
   <!-- Bootstrap JS -->
   <script src="/script.js"></script>
   

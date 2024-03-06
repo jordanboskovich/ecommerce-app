@@ -1,19 +1,25 @@
+// Importing required modules and dependencies
 import Customer from '../Models/Customer.js';
 import passport from 'passport';
 
+// Controller function to render login page
 export const login = (req, res) => {
   res.render('login');
 }
 
-export const verifyLogin = 
-  passport.authenticate('local', { successRedirect: '/',
-                                   failureRedirect: '/login',
-                                   failureFlash: false });
+// Middleware to authenticate login credentials
+export const verifyLogin = passport.authenticate('local', { 
+  successRedirect: '/',
+  failureRedirect: '/login',
+  failureFlash: false 
+});
 
+// Controller function to render register page
 export const register = (req, res) => {
   res.render('register');
 }
 
+// Middleware to verify and register a new user
 export const verifyRegister = async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -25,10 +31,12 @@ export const verifyRegister = async (req, res) => {
   }
 };
 
+// Controller function to render change password page
 export const changePassword = (req, res) => {
   res.render('changePassword', {user: req.user});
 }
 
+// Middleware to update user password
 export const updatePassword = async (req, res) => {
   try {
     const { username, currPassword, newPassword1, newPassword2 } = req.body;
@@ -64,6 +72,7 @@ export const updatePassword = async (req, res) => {
   }
 };
 
+// Controller function to toggle user role
 export const toggleUserRole = async (req, res) => {
   try {
     // Extract user ID from the request body
@@ -91,7 +100,7 @@ export const toggleUserRole = async (req, res) => {
   }
 };
 
-
+// Controller function to logout user
 export const logout = (req, res) => {
   req.logout(function(err) {
     if (err) { return next(err); }
@@ -116,5 +125,3 @@ export const isAdmin = (req, res, next) => {
   // If the user is not an admin, redirect them or show an error
   res.status(403).send('Access denied');
 }
-
-

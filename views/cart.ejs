@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
+    /* Custom CSS styles */
     .total-price {
       font-size: 1.25em;
       color: #333;
@@ -103,12 +104,14 @@
       <p>Your cart is empty.</p>
     <% } %>
   </div>
+  <!-- JavaScript script for handling purchase form submission -->
   <script>
     document.addEventListener('DOMContentLoaded', function () {
+      // Add event listener to purchase form submission
       const purchaseForm = document.querySelector('form[action="/purchase"]');
       if (purchaseForm) {
         purchaseForm.addEventListener('submit', function (e) {
-
+          // Display flash message for successful purchase
           const flashMessage = document.getElementById('flash-messages-purchase');
           flashMessage.innerHTML = '<div class="alert alert-success" role="alert">Purchase Successful.</div>';
           document.body.appendChild(flashMessage);
