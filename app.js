@@ -8,7 +8,6 @@ import flash from 'connect-flash';
 import configurePassport from './config/passport.js';
 
 import multer from 'multer';
-import sharp from 'sharp';
 import fs from 'fs';
 import path from 'path';
 
